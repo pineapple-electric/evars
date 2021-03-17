@@ -1,0 +1,13 @@
+# Python cache
+__pycache__
+
+# Python coverage cache
+.coverage
+
+# Python coverage reports
+cover
+
+# Python packaging files
+build
+dist
+*.egg-info

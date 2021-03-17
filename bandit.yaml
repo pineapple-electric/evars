@@ -1,0 +1,3 @@
+assert_used:
+  # All existing asserts in parser.py exist to document the codebase.
+  skips: [src/evars/parser.py]
