@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated pre-commit hooks
 - Added a markdown formatter
 - Added an FAQ to the README file
+- Updated the copyright date
 
 ## [0.0.1] - 2021-03-16
 
