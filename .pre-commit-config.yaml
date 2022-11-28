@@ -31,3 +31,7 @@ repos:
     args: [--autofix]
   - id: pretty-format-yaml
     args: [--autofix, --indent, '2']
+- repo: https://github.com/executablebooks/mdformat
+  rev: 0.7.16
+  hooks:
+  - id: mdformat
