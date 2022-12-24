@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "evars"
-version = "0.0.1"
+version = "0.1.0"
 readme = "README.rst"
 requires-python = "~=3.6"
 license = { file = "LICENSE" }
