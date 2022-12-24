@@ -54,7 +54,9 @@ class Environment(dict):
             logger.debug("Environment.source(): Opening file %s", env_file)
             if encoding is None:
                 encoding = "UTF-8"
-            env_file = open(env_file, "r", encoding=encoding)
+            env_file = open(  # pylint: disable=consider-using-with
+                env_file, "r", encoding=encoding
+            )
             close_file = True
         elif isinstance(env_file, io.TextIOBase):
             pass

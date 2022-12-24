@@ -6,6 +6,7 @@ import unittest
 
 from . import environment
 from . import errors
+from . import localtypes
 
 
 simple1 = io.StringIO("FOO=bar\n")
@@ -70,10 +71,16 @@ class EnvironmentTests(unittest.TestCase):
         self.assertEqual(expected, uut)
 
     def test_source3(self) -> None:
+        def callback(
+            _key: localtypes.T_OVERWRITE_CALLBACK_KEY,
+            _current: localtypes.T_OVERWRITE_CALLBACK_CURRENT_VALUE,
+            _future: localtypes.T_OVERWRITE_CALLBACK_FUTURE_VALUE,
+        ) -> localtypes.RetainThe:
+            return localtypes.RetainThe.FUTURE_VALUE
+
         uut = environment.Environment()
         uut.source(simple1)
         self.assertEqual(simple1_expected, uut)
-        callback = lambda x, y, z: environment.RetainThe.FUTURE_VALUE
         uut.source(simple2, overwrite_callback=callback)
         self.assertEqual(simple2_expected, uut)
 
