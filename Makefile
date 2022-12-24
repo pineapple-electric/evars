@@ -5,7 +5,7 @@ help:
 	@echo "    format        Format the code"
 	@echo "    lint          Lint the code"
 	@echo "    release       Package the code for release"
-	@echo "    test          Run the tests with Nose"
+	@echo "    test          Run the tests with Nose2"
 
 .PHONY: clean
 clean:
@@ -28,7 +28,7 @@ lint: bandit mypy pylint
 release: sdist wheel
 
 .PHONY: test
-test: nosetests
+test: nose2
 
 # Command targets
 .PHONY: bandit
@@ -43,9 +43,9 @@ black:
 mypy:
 	mypy src/evars
 
-.PHONY: nosetests
-nosetests:
-	nosetests --with-coverage --cover-html
+.PHONY: nose2
+nose2:
+	nose2 --with-coverage --coverage-report html
 
 .PHONY: pylint
 pylint:

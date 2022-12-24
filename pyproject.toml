@@ -33,7 +33,7 @@ lint = [
 ]
 test = [
   "coverage",
-  "nose",
+  "nose2",
 ]
 
 [project.urls]
