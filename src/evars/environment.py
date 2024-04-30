@@ -6,9 +6,9 @@ import shlex
 from .errors import FileFormatError
 from .errors import InvalidArgumentError
 from .localtypes import RetainThe
-from .localtypes import T_FILE
-from .localtypes import T_FILE_ENCODING
-from .localtypes import T_OVERWRITE_CALLBACK
+from .localtypes import EnvironmentFile
+from .localtypes import FileEncoding
+from .localtypes import OverwriteCallback
 from .parser import EnvironmentSubstitutionParser
 
 logger = logging.getLogger(__name__)
@@ -19,9 +19,9 @@ class Environment(dict):
 
     def source(
         self,
-        env_file: T_FILE,
-        encoding: T_FILE_ENCODING = None,
-        overwrite_callback: T_OVERWRITE_CALLBACK = None,
+        env_file: EnvironmentFile,
+        encoding: FileEncoding = None,
+        overwrite_callback: OverwriteCallback = None,
     ) -> "Environment":
         """
         Source the specified environment file
@@ -72,7 +72,10 @@ class Environment(dict):
             )
         for line in env_file.readlines():
             parts = shlex.shlex(line, posix=False)
-            left = parts.get_token()
+            # mypy says that parts.get_token() returns an Optional[str].  To
+            # ensure that we get a string, we add 'or ""' to (most) calls to
+            # parts.get_token().
+            left = parts.get_token() or ""
             equals = parts.get_token()
             if equals != "=":
                 raise FileFormatError(
@@ -80,10 +83,10 @@ class Environment(dict):
                 )
             # Assemble right side
             right_parts = []
-            right = parts.get_token()
+            right = parts.get_token() or ""
             while right != "":
                 right_parts.append(right)
-                right = parts.get_token()
+                right = parts.get_token() or ""
             right = "".join(right_parts)
             # Check right side for substitutions
             parser = EnvironmentSubstitutionParser(right)

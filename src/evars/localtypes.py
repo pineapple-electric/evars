@@ -2,11 +2,9 @@
 import enum
 import typing
 
-# Environment map
-T_EMAP = typing.Mapping[str, str]
-
-T_FILE = typing.Union[typing.TextIO, str]
-T_FILE_ENCODING = typing.Optional[str]
+EnvironmentFile = typing.Union[typing.TextIO, str]
+EnvironmentMapping = typing.Mapping[str, str]
+FileEncoding = typing.Optional[str]
 
 
 class RetainThe(enum.Enum):  # pylint: disable=invalid-name
@@ -15,9 +13,9 @@ class RetainThe(enum.Enum):  # pylint: disable=invalid-name
     FUTURE_VALUE = 2
 
 
-T_OVERWRITE_CALLBACK_KEY = str
-T_OVERWRITE_CALLBACK_CURRENT_VALUE = str
-T_OVERWRITE_CALLBACK_FUTURE_VALUE = str
+OverwriteCallbackKey = str
+OverwriteCallbackCurrentValue = str
+OverwriteCallbackFutureValue = str
 # A callback which receives the arguments:
 #     key: str
 #     current_value: str
@@ -26,12 +24,12 @@ T_OVERWRITE_CALLBACK_FUTURE_VALUE = str
 # discarded and the future_value retained (RetainThe.FUTURE_VALUE) or that the
 # future_value should be ignored and the current_value retained
 # (RetainThe.CURRENT_VALUE).
-T_OVERWRITE_CALLBACK = typing.Optional[
+OverwriteCallback = typing.Optional[
     typing.Callable[
         [
-            T_OVERWRITE_CALLBACK_KEY,
-            T_OVERWRITE_CALLBACK_CURRENT_VALUE,
-            T_OVERWRITE_CALLBACK_FUTURE_VALUE,
+            OverwriteCallbackKey,
+            OverwriteCallbackCurrentValue,
+            OverwriteCallbackFutureValue,
         ],
         RetainThe,
     ]

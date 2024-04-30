@@ -5,17 +5,18 @@ help:
 	@echo "    format        Format the code"
 	@echo "    lint          Lint the code"
 	@echo "    release       Package the code for release"
-	@echo "    test          Run the tests with Nose2"
+	@echo "    test          Run the tests"
 
 .PHONY: clean
 clean:
 	find . -type d -name __pycache__ -delete
 	rm -rf build
 	rm -rf .coverage
-	rm -rf cover
+	rm -rf htmlcov
 	rm -rf dist
 	rm -rf evars.egg-info
 	rm -rf .mypy_cache
+	rm -rf .pytest_cache
 
 # Aggregate targets
 .PHONY: format
@@ -28,12 +29,12 @@ lint: bandit mypy pylint
 release: sdist wheel
 
 .PHONY: test
-test: nose2
+test: pytest
 
 # Command targets
 .PHONY: bandit
 bandit:
-	bandit -c bandit.yaml -r src/evars
+	bandit -c bandit.yaml -r src
 
 .PHONY: black
 black:
@@ -41,16 +42,15 @@ black:
 
 .PHONY: mypy
 mypy:
-	mypy src/evars
+	mypy src
 
-.PHONY: nose2
-nose2:
-	nose2 --with-coverage --coverage-report html
+.PHONY: pytest
+pytest:
+	pytest --cov=src --cov-report=html src
 
 .PHONY: pylint
 pylint:
-	pylint --ignore localtypes.py src/evars || echo Status: $$?
-	pylint --class-naming-style=UPPER_CASE src/evars/localtypes.py || echo Status: $$?
+	pylint src || echo Status: $$?
 
 .PHONY: sdist
 sdist:

@@ -4,7 +4,7 @@ import logging
 
 from .errors import NoMatchingSubstitutionError
 from .errors import UnsupportedVariableError
-from .localtypes import T_EMAP
+from .localtypes import EnvironmentMapping
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class EnvironmentSubstitutionParser:
     def __init__(self, value: str):
         self._v = value
 
-    def expand(self, evars: T_EMAP) -> str:
+    def expand(self, evars: EnvironmentMapping) -> str:
         "Expand variables found in the initial string"
         # pylint: disable=too-many-branches
         # pylint: disable=too-many-statements

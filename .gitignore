@@ -1,3 +1,7 @@
+# Pytest files
+.pytest_cache
+pytestdebug.log
+
 # Python cache
 __pycache__
 
@@ -5,7 +9,7 @@ __pycache__
 .coverage
 
 # Python coverage reports
-cover
+htmlcov
 
 # Python packaging files
 build

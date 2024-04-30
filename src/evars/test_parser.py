@@ -39,7 +39,3 @@ class EnvironmentSubstitutionParserTests(unittest.TestCase):
         self.assertRaises(errors.NoMatchingSubstitutionError, uut2.expand, {})
         uut3 = parser.EnvironmentSubstitutionParser("$FOO-bar")
         self.assertRaises(errors.NoMatchingSubstitutionError, uut3.expand, {})
-
-
-if __name__ == "__main__":
-    unittest.main()

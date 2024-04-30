@@ -72,9 +72,9 @@ class EnvironmentTests(unittest.TestCase):
 
     def test_source3(self) -> None:
         def callback(
-            _key: localtypes.T_OVERWRITE_CALLBACK_KEY,
-            _current: localtypes.T_OVERWRITE_CALLBACK_CURRENT_VALUE,
-            _future: localtypes.T_OVERWRITE_CALLBACK_FUTURE_VALUE,
+            _key: localtypes.OverwriteCallbackKey,
+            _current: localtypes.OverwriteCallbackCurrentValue,
+            _future: localtypes.OverwriteCallbackFutureValue,
         ) -> localtypes.RetainThe:
             return localtypes.RetainThe.FUTURE_VALUE
 
@@ -110,7 +110,3 @@ class EnvironmentTests(unittest.TestCase):
     def test_file_format1(self) -> None:
         uut = environment.Environment()
         self.assertRaises(errors.FileFormatError, uut.source, invalid1)
-
-
-if __name__ == "__main__":
-    unittest.main()

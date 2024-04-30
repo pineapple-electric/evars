@@ -1,0 +1,8 @@
+bandit
+black
+build
+mypy
+pre-commit
+pylint
+pytest
+pytest-cov
